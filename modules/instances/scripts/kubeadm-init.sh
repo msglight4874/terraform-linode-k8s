@@ -46,7 +46,7 @@ controlPlaneEndpoint: ""
 controllerManager:
   extraArgs:
     cloud-provider: external
-    feature-gates: ""
+    feature-gates: "TTLAfterFinished=true"
 dns:
   type: CoreDNS
 etcd:
@@ -59,7 +59,9 @@ networking:
   dnsDomain: cluster.local
   podSubnet: ${POD_NETWORK}
   serviceSubnet: 10.96.0.0/12
-scheduler: {}
+scheduler:
+  extraArgs:
+    feature-gates: "TTLAfterFinished=true"
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
 bindAddress: 0.0.0.0
